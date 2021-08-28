@@ -18,6 +18,7 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Comands
+
         public Command EditCourseCommand { get; set; }
         public Command DeleteCourseCommand { get; set; }
         #endregion
