@@ -6,13 +6,12 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-     public class CreateCourseViewModel : BaseViewModel
+    public class EditCourseViewModel : BaseViewModel
     {
+
         #region Fields
         private ApiService _apiService;
-        private int _courseID;
-        private string _title;
-        private int _credits;
+        private CourseDTO _course;
         private bool _isEnabled;
         private bool _isRunning;
 
@@ -32,51 +31,43 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._isRunning, value); }
         }
 
-        public int CoursesID
+        public CourseDTO Course
         {
-            get { return this._courseID; }
-            set { this.SetValue(ref this._courseID, value); }
+            get { return this._course; }
+            set { this.SetValue(ref this._course, value); }
         }
 
-        public string  Title
-        {
-            get { return this._title; }
-            set { this.SetValue(ref this._title, value); }
-        }
-        public int Credits
-        {
-            get { return this._credits; }
-            set { this.SetValue(ref this._credits, value); }
-        }
+       
         #endregion
 
 
         #region Constructor
-        public CreateCourseViewModel()
-        {   
+        public EditCourseViewModel(CourseDTO course)
+        {
             this._apiService = new ApiService();
-            this.CreateCourseCommand = new Command(CreateCourses);
+            this.EditCourseCommand = new Command(EditCourses);
             this.IsEnable = true;
-            
+            this.Course = course;
+
         }
         #endregion
 
 
         #region Methods
-        async void CreateCourses()
+        async void EditCourses()
         {
             try
-              {
-                if (string.IsNullOrEmpty(this.Title)  ||
+            {
+                if (string.IsNullOrEmpty(this.Course.Title) ||
 
-                        this.Credits == 0 ||
-                        this.CoursesID == 0)
+                        this.Course.Credits == 0 ||
+                        this.Course.CourseID == 0)
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification",
                         "The fields are required",
                         "Cancel");
                     return;
-                
+
                 }
 
                 this.IsEnable = false;
@@ -87,24 +78,18 @@ namespace University.App.ViewModels.Forms
                 {
                     this.IsEnable = false;
                     this.IsRunning = true;
-                    
+
                     await Application.Current.MainPage.DisplayAlert("Notification",
                         "No internet connection",
                         "Cancel");
                     return;
                 }
-                var courseDTO = new CourseDTO
-                {
-                    CourseID = this.CoursesID,
-                    Title = this.Title,
-                    Credits = this.Credits
-
-                };
+                
                 var message = "The process is successful";
                 var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
-                    Endpoints.GET_COURSES,
-                    courseDTO,
-                    ApiService.Method.Post);
+                    Endpoints.PUT_COURSES + this.Course.CourseID,
+                    this.Course,
+                    ApiService.Method.Put);
 
                 if (responseDTO.Code >= 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
@@ -112,8 +97,8 @@ namespace University.App.ViewModels.Forms
                 this.IsEnable = false;
                 this.IsRunning = true;
 
-                this.CoursesID = this.CoursesID = 0;
-                this.Title = String.Empty;
+                this.Course.CourseID = this.Course.CourseID = 0;
+                this.Course.Title = String.Empty;
 
                 await Application.Current.MainPage.DisplayAlert("Notification",
                     message,
@@ -131,8 +116,7 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Commands
-        public Command CreateCourseCommand { get; set; }
+        public Command EditCourseCommand { get; set; }
         #endregion
-
     }
 }

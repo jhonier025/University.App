@@ -4,63 +4,78 @@
               BindingContext="{Binding Main, Source={StaticResource Locator}}"             
              x:Class="University.App.Views.Forms.StudentsPage">
 
-    <ContentPage.BindingContext>
-         <ContentPage>
-        <StackLayout BindingContext="{Binding Students}"
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_action_add_circle"
+                     Command="{Binding CreateCourseCommand}"/>
+    </ContentPage.ToolbarItems>
+
+
+    <ContentPage.Content>
+    <StackLayout BindingContext="{Binding Students}"
                      Padding="20"
                      VerticalOptions="Center">
 
-            <Frame BackgroundColor="Black"
+        <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                <Label Text="Students" TextColor="Blue" 
+            <Label Text="Students" TextColor="Blue" 
                        FontSize="38" HorizontalTextAlignment="Center" />
-            </Frame>
+        </Frame>
 
-            <Frame BorderColor="Black" 
+
+        <SearchBar Placeholder="Search...."
+                       HeightRequest="30"
+                       TextTransform="Lowercase"
+                       Text="{Binding Filter}"/>
+
+
+
+        <Frame BorderColor="Black" 
                    CornerRadius="14"
                    BackgroundColor="Gray">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Text="LastName" />
-                        <Label Grid.Column="1" Text="FirstMidName" HorizontalOptions="Center" />
-                </Grid>
-            </Frame>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <ListView ItemsSource="{Binding Students}"
+                <Label Grid.Column="0" Text="LastName" />
+                <Label Grid.Column="1" Text="FirstMidName" HorizontalOptions="Center" />
+            </Grid>
+        </Frame>
+
+        <ListView ItemsSource="{Binding Students}"
                       HasUnevenRows="True"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsRefreshing}"
                       RefreshCommand="{Binding RefreshCommand}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Frame BorderColor="Black" CornerRadius="14">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame BorderColor="Black" CornerRadius="14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                                        
-                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding LastName}" />
-                                       
-                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding FirstMidName}" />
-                                       
-                                       
-                                    </Grid>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage>
-    </ContentPage.BindingContext>
+                                <Label Grid.Column="0" Text="{Binding ID }"></Label>
+                                <Label Grid.Column="1" Text="{Binding FullName }"></Label>
+                                <Label Grid.Column="2" Text="{Binding EnrollmentDate }"></Label>
+
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+   
+
+  </ContentPage.Content>
 </ContentPage>

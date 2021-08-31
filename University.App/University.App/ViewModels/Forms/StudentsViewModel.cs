@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using University.App.Helpers;
 using University.BL.DTOs;
 using University.BL.Services.Implements;
@@ -12,10 +13,11 @@ namespace University.App.ViewModels.Forms
     {
         #region Fields
         private ApiService _apiService;
-        private bool _isRefreshing;
-        
-        
-        private ObservableCollection<StudentDTO> _Students;
+        private bool _isRefreshing;              
+        private ObservableCollection<StudentItemViewModel> _Students;
+        private List<StudentItemViewModel> _allStudents;
+        private string _filter;
+
         #endregion
 
 
@@ -28,11 +30,27 @@ namespace University.App.ViewModels.Forms
                
       
 
-        public ObservableCollection<StudentDTO> Students
+        public ObservableCollection<StudentItemViewModel> Students
         {
             get { return this._Students; }
             set { this.SetValue(ref this._Students, value); }
         }
+
+
+       
+        public string Filter
+        {
+            get { return this._filter; }
+            set
+
+            {
+                this.SetValue(ref this._filter, value);
+                this.GetStudentByFilter();
+
+            }
+
+        }
+
         #endregion
 
 
@@ -70,12 +88,13 @@ namespace University.App.ViewModels.Forms
                 }
                 
 
-                var responseDTO = await _apiService.RequestAPI<List<StudentDTO>>(Endpoints.URL_BASE_UNIVERSITY_API,
+                var responseDTO = await _apiService.RequestAPI<List<StudentItemViewModel>>(Endpoints.URL_BASE_UNIVERSITY_API,
                    Endpoints.GET_STUDENTS,
                    null,
                    ApiService.Method.Get);
 
-                this.Students= new ObservableCollection<StudentDTO>((List<StudentDTO>)responseDTO.Data);
+                this._allStudents = (List<StudentItemViewModel>)responseDTO.Data;
+                this.Students= new ObservableCollection<StudentItemViewModel>(this._allStudents);
                 this.IsRefreshing= false;
 
                
@@ -89,7 +108,19 @@ namespace University.App.ViewModels.Forms
             }
         }
 
+
+        void GetStudentByFilter()
+        {
+            var Students = this._allStudents;
+            if (!string.IsNullOrEmpty(this.Filter))
+                Students = Students.Where(x => x.FullName.ToLower().Contains(this.Filter)).ToList();
+            this.Students = new ObservableCollection<StudentItemViewModel>(Students);
+
+        }
+
         #endregion
+
+
         #region Commands
 
         public Command RefreshCommand { get; set; }
