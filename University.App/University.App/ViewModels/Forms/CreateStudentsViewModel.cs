@@ -54,9 +54,9 @@ namespace University.App.ViewModels.Forms
         public CreateStudentsViewModel()
         {
             this._apiService = new ApiService();
-            this.IsRunning = false;
             this.IsEnabled = true;
             this.EnrollmentDate = DateTime.UtcNow;
+
             this.CreateStudentCommand = new Command(CreateStudent);
         }
 

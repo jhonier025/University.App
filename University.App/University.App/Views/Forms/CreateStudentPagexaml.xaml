@@ -3,13 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              x:Class="University.App.Views.Forms.CreateStudentPagexaml">
+    
     <ContentPage.Content>
         <ScrollView BindingContext="{Binding CreateStudent}">
             
             <StackLayout Padding="20" VerticalOptions="Start">
 
-                <Frame BorderColor="Black" CornerRadius="14">
-                    <Grid Margin="10,0">
+                <Frame BackgroundColor="Black"
+                   CornerRadius="14">
+                    <Label Text="New Students" TextColor="Blue" 
+                       FontSize="38" HorizontalTextAlignment="Center" />
+                </Frame>
+                <Grid Margin="10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="2" />
@@ -18,13 +23,17 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="LastName" />
-                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding LastName  }" />
+                        <Label Grid.Row="0" Grid.Column="0" Text="FirstMidName" />
+                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding LastName}" />
 
                         <Label Grid.Row="1" Grid.Column="0" Text="FirstMidName" />
                         <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FirstMidName}" />
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="EnrollmentDate" />
+                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding EnrollmentDate }" />
 
                         <Label FontAttributes="Bold" 
                                Text="Enrollment Date" 
@@ -32,17 +41,22 @@
                                VerticalOptions="Center"></Label>
                         <DatePicker    
                          FontAttributes="Bold"
-                         MinimumDate="03/03/1600"
-                         MaximumDate="03/03/2100"
+                         MinimumDate="01/03/1600"
+                         MaximumDate="01/03/2100"
                          Grid.Row="2" 
                          Grid.Column="1"
                         
                           Date="{Binding EnrollmentDate}"  ></DatePicker>
                     </Grid>
-                </Frame>
-
-                <Button Text="Save" TextColor="White" BackgroundColor="Black" CornerRadius="14"
-                        Command="{Binding CreateStudentCommand}"/>
+               
+                <Button Text="Save" 
+                        CornerRadius="23" 
+                        HeightRequest="46"
+                        BackgroundColor="Navy"
+                        TextColor="Wheat"
+                        Command="{Binding CreateStudentCommand}"
+                        IsEnabled="{Binding IsEnabled}"/>
+                
 
                 <ActivityIndicator IsRunning="{Binding IsRunning}" />
                 

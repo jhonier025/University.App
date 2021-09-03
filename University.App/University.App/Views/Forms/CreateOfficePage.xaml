@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             x:Class="University.App.Views.Forms.CreateOfficePage">
+    <ContentPage.Content>
+        <ScrollView BindingContext="{Binding CreateOffice}">
+            <StackLayout Padding="20"
+                         VerticalOptions="Start">
+
+                <Frame BackgroundColor="Black"
+                   CornerRadius="14">
+                    <Label Text="New Office" TextColor="Blue" 
+                       FontSize="38" HorizontalTextAlignment="Center" />
+                </Frame>
+
+                <Grid Margin="10, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Instructor" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Picker Title="Seleccionar instructor" Grid.Row="0" Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Center"
+                            BackgroundColor="Transparent"
+                            ItemsSource="{Binding Instructors}"
+                            SelectedItem="{Binding IntructorSelected}"
+                            ItemDisplayBinding="{Binding FullName}"/>
+                   
+                    <Label Text="Location" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Location}"/>
+
+                    
+                </Grid>
+
+                <Button Text="Save" 
+                        CornerRadius="23" 
+                        HeightRequest="46"
+                        BackgroundColor="Navy"
+                        TextColor="Wheat"
+                        Command="{Binding CreateOficceCommand}"
+                        IsEnabled="{Binding IsEnable}"/>
+
+
+                <ActivityIndicator IsRunning="{Binding IsRunning}"/>
+
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

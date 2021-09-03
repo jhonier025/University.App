@@ -10,14 +10,24 @@ namespace University.App.ViewModels
         public StudentsViewModel Students{get; set;}
         public CreateCourseViewModel CreateCourse { get; set; }
         public CreateStudentsViewModel CreateStudent{ get; set; }
-        public EditCourseViewModel EditCourse{ get; set; }
+        public EditCourseViewModel EditCourse { get; set; }
+        public EditStudentViewModel EditStudent { get; set; }
+        public CreateOfficeViewModel CreateOffice { get; set; }
+        public HomeViewModel Home { get; set; }
+
+
+
         public MainViewModel()
         {
             instance = this;
+         
             this.Courses = new CoursesViewModel();
             this.Students = new StudentsViewModel();
+            this.CreateOffice = new CreateOfficeViewModel();
 
             this.CreateCourseCommand = new Command(GoToCreateCourse);
+            this.CreateStudentCommand = new Command(GoToCreateStudent);
+
 
         }
 
@@ -25,6 +35,8 @@ namespace University.App.ViewModels
         
           public Command CreateCourseCommand { get; set; }
           public Command CreateStudentCommand { get; set; }
+
+
         #endregion
 
         #region Methods
@@ -34,12 +46,12 @@ namespace University.App.ViewModels
             await Application.Current.MainPage.Navigation.PushAsync( new CreateCoursePage());
         }
 
-
-        async void GoToCreateStundent()
+        async void GoToCreateStudent()
         {
             GetInstance().CreateStudent = new CreateStudentsViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new CreateStudentPagexaml());
         }
+
         #endregion
 
         #region Singleton
