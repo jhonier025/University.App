@@ -15,15 +15,19 @@ namespace University.App.ViewModels
         public CreateOfficeViewModel CreateOffice { get; set; }
         public HomeViewModel Home { get; set; }
 
+        public DepartmentsViewModel Departments { get; set; }
+        public EditDepatmentViewModel EditDepartments { get; set; }
+
 
 
         public MainViewModel()
         {
             instance = this;
-         
+            this.Home = new HomeViewModel();
             this.Courses = new CoursesViewModel();
             this.Students = new StudentsViewModel();
             this.CreateOffice = new CreateOfficeViewModel();
+            this.Departments = new DepartmentsViewModel();
 
             this.CreateCourseCommand = new Command(GoToCreateCourse);
             this.CreateStudentCommand = new Command(GoToCreateStudent);
@@ -47,6 +51,12 @@ namespace University.App.ViewModels
         }
 
         async void GoToCreateStudent()
+        {
+            GetInstance().CreateStudent = new CreateStudentsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new CreateStudentPagexaml());
+        }
+
+        async void GoToCreateDepartment()
         {
             GetInstance().CreateStudent = new CreateStudentsViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new CreateStudentPagexaml());

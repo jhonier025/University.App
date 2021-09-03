@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             x:Class="University.App.Views.Forms.CreateOfficePage">
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             x:Class="University.App.Views.Forms.EditDepartmentPage">
     <ContentPage.Content>
-        <ScrollView BindingContext="{Binding CreateOffice}">
+        <ScrollView BindingContext="{Binding EditDepartments }">
             <StackLayout Padding="20"
                          VerticalOptions="Start">
 
                 <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                    <Label Text="New Office" TextColor="Blue" 
+                    <Label Text="Edit Courses" TextColor="Blue" 
                        FontSize="38" HorizontalTextAlignment="Center" />
                 </Frame>
 
@@ -22,21 +22,17 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Text="Instructor" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <Picker Title="Seleccionar instructor" Grid.Row="0" Grid.Column="1"
-                            HorizontalOptions="FillAndExpand"
-                            HorizontalTextAlignment="Center"
-                            BackgroundColor="Transparent"
-                            ItemsSource="{Binding Instructors}"
-                            SelectedItem="{Binding IntructorSelected}"
-                            ItemDisplayBinding="{Binding FullName}"/>
-                   
-                    <Label Text="Location" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Location}"/>
+                    <Label Text="Name" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1"  Text="{Binding Department.Name}"/>
 
-                    
+                    <Label Text="Title" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Department.StartDate}"/>
+
+                    <Label Text="Credist" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="{Binding Department.Budget}" />
                 </Grid>
 
                 <Button Text="Save" 
@@ -44,7 +40,7 @@
                         HeightRequest="46"
                         BackgroundColor="Navy"
                         TextColor="Wheat"
-                        Command="{Binding CreateOfficeCommand}"
+                        Command="{Binding EditDepartmentCommand}"
                         IsEnabled="{Binding IsEnable}"/>
 
 

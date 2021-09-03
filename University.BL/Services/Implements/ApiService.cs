@@ -17,6 +17,7 @@ namespace University.BL.Services.Implements
         /// <returns></returns>
         public async Task<bool> CheckConnection()
         {
+            return true;
             if (!CrossConnectivity.Current.IsConnected)
                 return false;
 

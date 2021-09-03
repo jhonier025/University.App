@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             x:Class="University.App.Views.Forms.DepartmentPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_action_add_circle"
+                     Command="{Binding CreateStudentCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <StackLayout BindingContext="{Binding Departments}"
+                     Padding="20"
+                     VerticalOptions="Center">
+
+                <Frame BackgroundColor="Black"
+                   CornerRadius="14">
+                    <Label Text="Departments" TextColor="Blue" 
+                       FontSize="38" HorizontalTextAlignment="Center" />
+                </Frame>
+
+
+                <SearchBar Placeholder="Search...."
+                       HeightRequest="30"
+                       TextTransform="Lowercase"
+                       Text="{Binding Filter}"/>
+
+                <Frame BorderColor="Black" 
+                   CornerRadius="14"
+                   BackgroundColor="Gray">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Text="ID" />
+                        <Label Grid.Column="1" Text="Title" HorizontalOptions="Center" />
+                    </Grid>
+                </Frame>
+
+                <ListView ItemsSource="{Binding Department}"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      RefreshCommand="{Binding RefreshCommand}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BorderColor="Black" CornerRadius="14">
+                                    <Grid>
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EditDepartmentCommand}"/>
+                                        </Grid.GestureRecognizers>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Text="{Binding DepartmentID}" />
+                                        <Label Grid.Column="1" Text="{Binding Name}" HorizontalOptions="Center" />
+                                        <ImageButton Grid.Column="2" Source="ic_delete"
+                                                 BackgroundColor="Transparent" Command="{Binding DeleteDepartmentCommand}"/>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage.Content>
+</ContentPage>

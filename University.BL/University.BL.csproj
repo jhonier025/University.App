@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\CourseDTO.cs" />
+    <Compile Include="DTOs\DepartmentDTO.cs" />
     <Compile Include="DTOs\InstructorDTO.cs" />
     <Compile Include="DTOs\OfficeDTO.cs" />
     <Compile Include="DTOs\ResponseDTO.cs" />

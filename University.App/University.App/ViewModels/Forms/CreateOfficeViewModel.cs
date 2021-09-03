@@ -61,7 +61,7 @@ namespace University.App.ViewModels.Forms
         public CreateOfficeViewModel()
         {
             this._apiService = new ApiService();
-            this.CreateOficceCommand = new Command(CreateOffice);
+            this.CreateOfficeCommand = new Command(CreateOffice);
             this.GetInstructorsCommand= new Command(GetInstructor);
             this.GetInstructorsCommand.Execute(null);
 
@@ -91,7 +91,7 @@ namespace University.App.ViewModels.Forms
                     return;
                 }
 
-                var responseDTO = await _apiService.RequestAPI<List<OfficeDTO>>(Endpoints.URL_BASE_UNIVERSITY_API,
+                var responseDTO = await _apiService.RequestAPI<List<InstructorDTO>>(Endpoints.URL_BASE_UNIVERSITY_API,
                     Endpoints.GET_INSTRUCTORS,
                     null,
                     ApiService.Method.Get);
@@ -146,7 +146,7 @@ namespace University.App.ViewModels.Forms
                     officeDTO,
                     ApiService.Method.Post);
 
-                if (responseDTO.Code >= 200 || responseDTO.Code > 299)
+                if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
 
                 this.IsEnable = false;
@@ -157,7 +157,6 @@ namespace University.App.ViewModels.Forms
                 await Application.Current.MainPage.DisplayAlert("Notification",
                     message,
                     "Cancel");
-
             }
             catch (Exception ex)
             {
@@ -170,7 +169,7 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Commands
-        public Command CreateOficceCommand { get; set; }
+        public Command CreateOfficeCommand { get; set; }
         public Command GetInstructorsCommand { get; set; }
 
         #endregion

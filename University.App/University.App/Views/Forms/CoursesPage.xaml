@@ -4,9 +4,10 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              x:Class="University.App.Views.Forms.CoursesPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_action_add_circle"
+          <ToolbarItem IconImageSource="ic_action_add_circle"
                      Command="{Binding CreateCourseCommand}"/>
-    </ContentPage.ToolbarItems>
+          </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout BindingContext="{Binding Courses}"
                      Padding="20"
