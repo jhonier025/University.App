@@ -43,12 +43,12 @@ namespace University.App.ViewModels.Forms
                 }
 
                 var message = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
-                    Endpoints.DELETE_COURSES + this.CourseID,
+                var responseDTO = await _apiService.RequestAPI<DepartmentDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
+                    Endpoints.DELETE_DEPARTMENTS + this.DepartmentID,
                     null,
                     ApiService.Method.Delete);
 
-                if (responseDTO.Code >= 200 || responseDTO.Code > 299)
+                if (responseDTO.Code <= 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
 
                 await Application.Current.MainPage.DisplayAlert("Notification",

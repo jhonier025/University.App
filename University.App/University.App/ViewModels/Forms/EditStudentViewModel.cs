@@ -62,7 +62,7 @@ namespace University.App.ViewModels.Forms
         {
             try
             {
-                if (string.IsNullOrEmpty(this.Student.LastName) ||
+                if (string.IsNullOrEmpty(this.Student.FirstMidName) ||
 
                         this.Student.ID == 0 )
                 {
@@ -89,19 +89,19 @@ namespace University.App.ViewModels.Forms
                 }
 
                 var message = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
+                var responseDTO = await _apiService.RequestAPI<StudentDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
                     Endpoints.PUT_STUDENTS + this.Student.ID,
                     this.Student,
                     ApiService.Method.Put);
 
-                if (responseDTO.Code >= 200 || responseDTO.Code > 299)
+                if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
 
                 this.IsEnable = false;
                 this.IsRunning = true;
 
                 this.Student.ID = this.Student.ID = 0;
-                this.Student.LastName = String.Empty;
+                this.Student.FirstMidName = String.Empty;
 
                 await Application.Current.MainPage.DisplayAlert("Notification",
                     message,

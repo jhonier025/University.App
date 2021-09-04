@@ -102,7 +102,7 @@ namespace University.App.ViewModels.Forms
                     "The Process is successful",
                     "Cancel");
 
-                this.LastName = this.FirstMidName = string.Empty;
+                this.FirstMidName = this.FirstMidName = string.Empty;
                 this.EnrollmentDate = DateTime.UtcNow;
 
                 this.IsEnabled = true;

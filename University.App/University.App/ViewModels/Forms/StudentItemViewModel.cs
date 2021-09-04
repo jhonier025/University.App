@@ -45,7 +45,7 @@ namespace University.App.ViewModels.Forms
                 }
 
                 var message = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
+                var responseDTO = await _apiService.RequestAPI<StudentDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
                     Endpoints.DELETE_STUDENTS + this.ID,
                     null,
                     ApiService.Method.Delete);

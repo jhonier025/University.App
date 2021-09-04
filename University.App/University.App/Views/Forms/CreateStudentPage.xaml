@@ -22,31 +22,19 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                                                       
                             
                         </Grid.RowDefinitions>
+                    
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="FirstMidName" />
-                        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding LastName}" />
+                    <Label Text="FirstMidName" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding FirstMidName}"/>
 
-                        <Label Grid.Row="1" Grid.Column="0" Text="FirstMidName" />
-                        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FirstMidName}" />
+                    <Label Text="EnrollmentDate" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding EnrollmentDate}"/>
 
-                        <Label Grid.Row="2" Grid.Column="0" Text="EnrollmentDate" />
-                        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding EnrollmentDate }" />
 
-                        <Label FontAttributes="Bold" 
-                               Text="Enrollment Date" 
-                               Grid.Row="2" Grid.Column="0" 
-                               VerticalOptions="Center"></Label>
-                        <DatePicker    
-                         FontAttributes="Bold"
-                         MinimumDate="01/03/1600"
-                         MaximumDate="01/03/2100"
-                         Grid.Row="2" 
-                         Grid.Column="1"
-                        
-                          Date="{Binding EnrollmentDate}"  ></DatePicker>
+                    
                     </Grid>
                
                 <Button Text="Save" 

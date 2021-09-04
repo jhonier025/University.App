@@ -91,7 +91,7 @@ namespace University.App.ViewModels.Forms
                     this.Course,
                     ApiService.Method.Put);
 
-                if (responseDTO.Code >= 200 || responseDTO.Code > 299)
+                if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
 
                 this.IsEnable = false;

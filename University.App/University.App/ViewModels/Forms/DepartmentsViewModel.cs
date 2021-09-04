@@ -39,7 +39,7 @@ namespace University.App.ViewModels.Forms
 
             {
                 this.SetValue(ref this._filter, value);
-                this.GetDepatmentByFilter();
+                this.GetDepartmentByFilter();
 
             }
 
@@ -90,11 +90,11 @@ namespace University.App.ViewModels.Forms
             }
         }
 
-        void GetDepatmentByFilter()
+        void GetDepartmentByFilter()
         {
             var department= this._alldepartament;
             if (!string.IsNullOrEmpty(this.Filter))
-                department = department.Where(x => x.DepartmentID.ToLower().Contains(this.Filter)).ToList();
+                department = department.Where(x => x.Name.ToLower().Contains(this.Filter)).ToList();
             this.Department = new ObservableCollection<DepartmentItemViewModel>(department);
 
         }

@@ -43,7 +43,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Text="LastName" />
+                <Label Grid.Column="0" Text="LastName" HorizontalOptions="Center" />
               </Grid>
         </Frame>
 
@@ -68,7 +68,7 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                             
-                                <Label Grid.Column="0" Text="{Binding FirstMidName }"></Label>
+                                <Label Grid.Column="0" Text="{Binding FirstMidName }" HorizontalOptions="Center"></Label>
                                
                                     <ImageButton Grid.Column="2" Source="ic_delete"
                                                  BackgroundColor="Transparent" Command="{Binding DeleteStudentCommand }"/>
