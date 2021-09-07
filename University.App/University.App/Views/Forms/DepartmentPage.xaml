@@ -18,7 +18,7 @@
                 <Frame BackgroundColor="Black"
                    CornerRadius="14">
                     <Label Text="Departments" TextColor="Blue" 
-                       FontSize="38" HorizontalTextAlignment="Center" />
+                       FontSize="30" HorizontalTextAlignment="Center" />
                 </Frame>
 
 
@@ -36,14 +36,17 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         
-                        <Label Grid.Column="0" Text="Name" HorizontalOptions="Center" />
+                        <Label Grid.Column="0" Text="ID" />
+                        <Label Grid.Column="1" Text="Title" HorizontalOptions="Center" />
+                        
                     </Grid>
                 </Frame>
 
-                <ListView ItemsSource="{Binding Department}"
+            <ListView ItemsSource="{Binding Department}"
                       HasUnevenRows="True"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsRefreshing}"

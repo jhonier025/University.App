@@ -2,23 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             x:Class="University.App.Views.Forms.CoursesPage">
+             x:Class="University.App.Views.Forms.InstructorPage">
     <ContentPage.ToolbarItems>
-          <ToolbarItem IconImageSource="ic_action_add_circle"
-                     Command="{Binding CreateCourseCommand}"/>
-          </ContentPage.ToolbarItems>
-    
+        <ToolbarItem IconImageSource="ic_action_add_circle"
+                     Command="{Binding CreateInstructorCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout BindingContext="{Binding Courses}"
+        <StackLayout BindingContext="{Binding Instructors}"
                      Padding="20"
                      VerticalOptions="Center">
 
             <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                <Label Text="Courses" TextColor="Blue" 
+                <Label Text="Instructors" TextColor="Blue" 
                        FontSize="38" HorizontalTextAlignment="Center" />
             </Frame>
-            
+
 
             <SearchBar Placeholder="Search...."
                        HeightRequest="30"
@@ -34,16 +34,15 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Text="ID" />
-                    <Label Grid.Column="1" Text="Title" HorizontalOptions="Center" />
+                         <Label Grid.Column="0" Text="ID"  />
+                         <Label Grid.Column="1" Text="Title" HorizontalOptions="Center" />
                 </Grid>
             </Frame>
 
-            <ListView ItemsSource="{Binding Courses}"
+            <ListView ItemsSource="{Binding Instructor}"
                       HasUnevenRows="True"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsRefreshing}"
@@ -55,19 +54,19 @@
                                 <Grid>
 
                                     <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding EditCourseCommand}"/>
+                                        <TapGestureRecognizer Command="{Binding EditInstructorCommand}"/>
                                     </Grid.GestureRecognizers>
-                                    
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0" Text="{Binding CourseID}" />
-                                    <Label Grid.Column="1" Text="{Binding Title}" HorizontalOptions="Center" />
+                                    <Label Grid.Column="0" Text="{Binding ID}" />
+                                    <Label Grid.Column="1" Text="{Binding LastName}" HorizontalOptions="Center" />
                                     <ImageButton Grid.Column="2" Source="ic_delete"
-                                                 BackgroundColor="Transparent" Command="{Binding DeleteCourseCommand}"/>
+                                                 BackgroundColor="Transparent" Command="{Binding DeleteInstructorCommand}"/>
                                 </Grid>
                             </Frame>
                         </ViewCell>
@@ -76,4 +75,5 @@
             </ListView>
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>

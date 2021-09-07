@@ -16,6 +16,9 @@ namespace University.App.ViewModels.Forms
         private bool _isEnabled;
         private bool _isRunning;
 
+        private List<InstructorDTO> _instructor;
+        private InstructorDTO _instructorSelected;
+
         #endregion
 
         #region Properties
@@ -37,6 +40,18 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._department, value); }
         }
 
+        public List<InstructorDTO> Instructors
+        {
+            get { return this._instructor; }
+            set { this.SetValue(ref this._instructor, value); }
+        }
+
+        public InstructorDTO IntructorSelected
+        {
+            get { return this._instructorSelected; }
+            set { this.SetValue(ref this._instructorSelected, value); }
+        }
+
 
         #endregion
 
@@ -45,6 +60,8 @@ namespace University.App.ViewModels.Forms
         {
             this._apiService = new ApiService();
             this.EditDepartmentCommand = new Command(EditDepartment);
+            this.GetInstructorsCommand = new Command(GetInstructor);           
+            this.GetInstructorsCommand.Execute(null);
             this.IsEnable = true;
             this.Department = department;
 
@@ -52,6 +69,39 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Methods
+
+
+        async void GetInstructor()
+        {
+            try
+            {
+                var connection = await _apiService.CheckConnection();
+                if (!connection)
+                {
+                    this.IsEnable = false;
+                    this.IsRunning = true;
+
+                    await Application.Current.MainPage.DisplayAlert("Notification",
+                        "No internet connection",
+                        "Cancel");
+                    return;
+                }
+
+                var responseDTO = await _apiService.RequestAPI<List<InstructorDTO>>(Endpoints.URL_BASE_UNIVERSITY_API,
+                    Endpoints.GET_INSTRUCTORS,
+                    null,
+                    ApiService.Method.Get);
+
+                this.Instructors = (List<InstructorDTO>)responseDTO.Data;
+
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Notification", ex.Message, "Cancel");
+            }
+
+
+        }
         async void EditDepartment()
         {
             try
@@ -81,6 +131,11 @@ namespace University.App.ViewModels.Forms
                         "Cancel");
                     return;
                 }
+                var departmentDTO = new DepartmentDTO
+                {
+                    InstructorID = this.IntructorSelected.ID,
+                    
+                };
 
                 var message = "The process is successful";
                 var responseDTO = await _apiService.RequestAPI<DepartmentDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
@@ -94,6 +149,7 @@ namespace University.App.ViewModels.Forms
                 this.IsEnable = false;
                 this.IsRunning = true;
 
+                
                 this.Department.DepartmentID = this.Department.DepartmentID = 0;
                 this.Department.Name = String.Empty;
 
@@ -114,6 +170,7 @@ namespace University.App.ViewModels.Forms
 
         #region Commands
         public Command EditDepartmentCommand { get; set; }
+        public Command GetInstructorsCommand { get; set; }
         #endregion
     }
 }

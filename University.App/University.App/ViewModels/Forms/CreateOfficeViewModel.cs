@@ -20,7 +20,6 @@ namespace University.App.ViewModels.Forms
 
         #endregion
 
-
         #region Properties
         public bool IsEnable
         {
@@ -56,7 +55,6 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
-
         #region Constructor
         public CreateOfficeViewModel()
         {
@@ -71,7 +69,6 @@ namespace University.App.ViewModels.Forms
 
         }
         #endregion
-
 
         #region Methods
 

@@ -11,7 +11,7 @@
                 <Frame BackgroundColor="Black"
                    CornerRadius="14">
                     <Label Text="New Departments" TextColor="Blue" 
-                       FontSize="38" HorizontalTextAlignment="Center" />
+                       FontSize="30" HorizontalTextAlignment="Center" />
                 </Frame>
 
                 <Grid Margin="10, 0">
@@ -20,6 +20,7 @@
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
@@ -31,11 +32,17 @@
                             BackgroundColor="Transparent"
                             ItemsSource="{Binding Instructors}"
                             SelectedItem="{Binding IntructorSelected}"
-                            ItemDisplayBinding="{Binding Name}"/>
+                            ItemDisplayBinding="{Binding FullName}"/>
 
-                    <Label Text="DepartmentID" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding DepartmentID}"/>
+                    <Label Text="Name" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
 
+                    <Label Text="Budget" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Budget}"/>
+
+
+                    <Label Text="StartDate" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding StartDate}"/>
 
                 </Grid>
 

@@ -23,6 +23,8 @@ namespace University.App.ViewModels
 
         #region Office
          public CreateOfficeViewModel CreateOffice { get; set; }
+         public EditOfficeViewModel EditOffice { get; set; }
+         public OfficeViewModel Office { get; set; }
         #endregion
 
 
@@ -38,6 +40,13 @@ namespace University.App.ViewModels
         public CreateDepartmentViewModel CreateDepartment { get; set; }
         #endregion
 
+        #region Instructor
+
+        public InstructorsViewModel Instructors { get; set; }
+        public EditInstructorViewModel EditInstructor { get; set; }
+        public CreateInstructorViewModel CreateInstructor { get; set; }
+        #endregion
+
 
         public MainViewModel()
         {
@@ -45,12 +54,16 @@ namespace University.App.ViewModels
             this.Home = new HomeViewModel();
             this.Courses = new CoursesViewModel();
             this.Students = new StudentsViewModel();
-            this.CreateOffice = new CreateOfficeViewModel();
+          
             this.Departments = new DepartmentsViewModel();
+            this.Instructors = new InstructorsViewModel();
+            this.Office = new OfficeViewModel();
 
             this.CreateCourseCommand = new Command(GoToCreateCourse);
             this.CreateStudentCommand = new Command(GoToCreateStudent);
             this.CreateDepartmentCommand = new Command(GoToCreateDepartment); 
+            this.CreateInstructorCommand = new Command(GoToCreateInstructor); 
+            this.CreateOfficeCommand = new Command(GoToCreateOffice); 
 
 
         }
@@ -60,7 +73,8 @@ namespace University.App.ViewModels
           public Command CreateCourseCommand { get; set; }
           public Command CreateStudentCommand { get; set; }
           public Command CreateDepartmentCommand { get; set; }
-
+          public Command CreateInstructorCommand { get; set; }
+          public Command CreateOfficeCommand { get; set; }
 
 
         #endregion
@@ -82,6 +96,19 @@ namespace University.App.ViewModels
         {
             GetInstance().CreateDepartment = new CreateDepartmentViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new CreateDepartmentPage());
+        }
+
+        async void GoToCreateInstructor()
+        {
+            GetInstance().CreateInstructor = new CreateInstructorViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new CreateInstructorPage());
+        }
+
+
+        async void GoToCreateOffice()
+        {
+            GetInstance().CreateOffice= new CreateOfficeViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new CreateOfficePage());
         }
 
         #endregion

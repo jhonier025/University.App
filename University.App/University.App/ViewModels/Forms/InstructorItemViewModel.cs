@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using University.App.Helpers;
 using University.App.Views.Forms;
 using University.BL.DTOs;
@@ -7,25 +9,24 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class CourseItemViewModel : CourseDTO
+    public class InstructorItemViewModel : InstructorDTO
     {
         #region Fields
         private ApiService _apiService;
         #endregion
 
-
         #region Methods
 
-        async void EditCourse()
+        async void EditInstructor()
         {
-           MainViewModel.GetInstance().EditCourse = new EditCourseViewModel(this);
-            await Application.Current.MainPage.Navigation.PushAsync(new EditCoursePage());
-        
-       }
-        async void DeleteCourses()
+            MainViewModel.GetInstance().EditInstructor = new EditInstructorViewModel(this);
+            await Application.Current.MainPage.Navigation.PushAsync(new EditInstructorPage());
+
+        }
+        async void DeleteInstructor()
         {
             try
-            {         
+            {
                 var answer = await Application.Current.MainPage.DisplayAlert("Notification",
                         "Delete confirm",
                         "Yes",
@@ -42,22 +43,22 @@ namespace University.App.ViewModels.Forms
                         "Cancel");
                     return;
                 }
-                
+
                 var message = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
-                    Endpoints.DELETE_COURSES + this.CourseID,
+                var responseDTO = await _apiService.RequestAPI<InstructorDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
+                    Endpoints.DELETE_INSTRUCTOR + this.ID,
                     null,
                     ApiService.Method.Delete);
 
-                if (responseDTO.Code < 200 || responseDTO.Code > 299)
+                if (responseDTO.Code <= 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
-                                
+
                 await Application.Current.MainPage.DisplayAlert("Notification",
                    message,
                     "Cancel");
             }
             catch (Exception ex)
-            {                
+            {
                 await Application.Current.MainPage.DisplayAlert("Notification", ex.Message, "Cancel");
             }
 
@@ -67,18 +68,19 @@ namespace University.App.ViewModels.Forms
 
         #region Comands
 
-        public Command EditCourseCommand { get; set; }
-        public Command DeleteCourseCommand { get; set; }
+        public Command EditInstructorCommand { get; set; }
+        public Command DeleteInstructorCommand { get; set; }
         #endregion
 
 
         #region Contructor
-        public CourseItemViewModel()
+        public InstructorItemViewModel()
         {
             this._apiService = new ApiService();
-            this.EditCourseCommand = new Command(EditCourse);
-            this.DeleteCourseCommand = new Command(DeleteCourses);
+            this.EditInstructorCommand = new Command(EditInstructor);
+             this.DeleteInstructorCommand = new Command(DeleteInstructor);
         }
         #endregion
+
     }
 }

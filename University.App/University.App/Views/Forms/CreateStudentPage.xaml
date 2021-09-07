@@ -22,18 +22,23 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                                                        
                             
                         </Grid.RowDefinitions>
+
+                    <Label Text="LastName" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry  Grid.Row="0" Grid.Column="1" Text="{Binding LastName}"/>
+
+
+                    <Label Text="FirstMidName" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FirstMidName}"/>
+
+                    <Label Text="EnrollmentDate" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding EnrollmentDate}"/>
+
+
                     
-
-                    <Label Text="FirstMidName" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding FirstMidName}"/>
-
-                    <Label Text="EnrollmentDate" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding EnrollmentDate}"/>
-
-
                     
                     </Grid>
                

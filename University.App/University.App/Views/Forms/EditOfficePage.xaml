@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             x:Class="University.App.Views.Forms.EditDepartmentPage">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             x:Class="University.App.Views.Forms.EditOfficePage">
     <ContentPage.Content>
-        <ScrollView BindingContext="{Binding EditDepartments }">
+        <ScrollView BindingContext="{Binding EditOffice }">
             <StackLayout Padding="20"
                          VerticalOptions="Start">
 
                 <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                    <Label Text="Edit Courses" TextColor="Blue" 
+                    <Label Text="Edit Office" TextColor="Blue" 
                        FontSize="38" HorizontalTextAlignment="Center" />
                 </Frame>
 
@@ -22,15 +22,15 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                      
                     </Grid.RowDefinitions>
-                     
 
-                    <Label Text="Name" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry IsEnabled="True" Grid.Row="0" Grid.Column="1"  Text="{Binding Department.Name}"/>
+                    <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1"  Text="{Binding Office.Location}"/>
 
-                    <Label Text="Title" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Department.StartDate}"/>
+                    <Label Text="Location" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding InstructorSelected}"/>
+
 
                 </Grid>
 
@@ -39,8 +39,8 @@
                         HeightRequest="46"
                         BackgroundColor="Navy"
                         TextColor="Wheat"
-                        Command="{Binding EditDepartmentCommand}"
-                        IsEnabled="{Binding IsEnable}"/>
+                        Command="{Binding EditOfficeCommand}"
+                        IsEnabled="{Binding IsEnabled}"/>
 
 
                 <ActivityIndicator IsRunning="{Binding IsRunning}"/>

@@ -16,13 +16,50 @@
                 </Label>
 
                 <Label Text="Students"
-                       FontSize="24"
+                       FontSize="22"
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GetStudentsCommand}" />
                     </Label.GestureRecognizers>
+                 
                 </Label>
+
+                <Label Text="Instructor"
+                       FontSize="22"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetInstructorCommand}" />
+                    </Label.GestureRecognizers>
+
+                </Label>
+
+
+                <Label Text="Departments"
+                       FontSize="22"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetDepartmentCommand}" />
+                    </Label.GestureRecognizers>
+
+                </Label>
+
+                <Label Text="Office"
+                       FontSize="22"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetOfficeCommand}" />
+                    </Label.GestureRecognizers>
+
+                </Label>
+
+
+
+
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

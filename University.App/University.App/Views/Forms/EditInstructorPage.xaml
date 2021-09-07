@@ -2,15 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             x:Class="University.App.Views.Forms.EditDepartmentPage">
+             x:Class="University.App.Views.Forms.EditInstructorPage">
     <ContentPage.Content>
-        <ScrollView BindingContext="{Binding EditDepartments }">
+
+        <ScrollView BindingContext="{Binding EditInstructor }">
             <StackLayout Padding="20"
                          VerticalOptions="Start">
 
                 <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                    <Label Text="Edit Courses" TextColor="Blue" 
+                    <Label Text="Edit Instructor" TextColor="Blue" 
                        FontSize="38" HorizontalTextAlignment="Center" />
                 </Frame>
 
@@ -22,16 +23,16 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                       
                     </Grid.RowDefinitions>
-                     
 
-                    <Label Text="Name" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry IsEnabled="True" Grid.Row="0" Grid.Column="1"  Text="{Binding Department.Name}"/>
+                    <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1"  Text="{Binding Instructor.ID}"/>
 
-                    <Label Text="Title" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Department.StartDate}"/>
+                    <Label Text="FullName" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Instructor.FullName}"/>
 
+                    
                 </Grid>
 
                 <Button Text="Save" 
@@ -39,7 +40,7 @@
                         HeightRequest="46"
                         BackgroundColor="Navy"
                         TextColor="Wheat"
-                        Command="{Binding EditDepartmentCommand}"
+                        Command="{Binding EditInstructorCommand}"
                         IsEnabled="{Binding IsEnable}"/>
 
 
@@ -49,5 +50,6 @@
 
             </StackLayout>
         </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>

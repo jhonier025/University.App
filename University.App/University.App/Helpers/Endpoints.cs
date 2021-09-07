@@ -24,6 +24,9 @@
 
         #region Office
         public static string POST_OFFICES { get; set; } = "api/OfficeAssignments/";
+        public static string GET_OFFICES { get; set; } = "api/OfficeAssignments/";
+        public static string PUT_OFFICES { get; set; } = "api/OfficeAssignments/";
+        public static string DELETE_OFFICES { get; set; } = "api/OfficeAssignments/";
         #endregion
 
         #region Departments
@@ -31,6 +34,13 @@
         public static string POST_DEPARTMENTS { get; set; } = "api/Departments/";
         public static string DELETE_DEPARTMENTS { get; set; } = "api/Departments/";
         public static string PUT_DEPARTMENTS { get; set; } = "api/Departments/";
+        #endregion
+
+        #region Instructros
+        public static string GET_INSTRUCTOR { get; set; } = "api/Instructors/GetInstructors/";
+        public static string POST_INSTRUCTOR { get; set; } = "api/Instructors/";
+        public static string DELETE_INSTRUCTOR{ get; set; } = "/api/Instructors";
+        public static string PUT_INSTRUCTOR { get; set; } = "/api/Instructors";
         #endregion
     }
 }

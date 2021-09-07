@@ -12,5 +12,7 @@ namespace University.BL.DTOs
         
         [JsonProperty("Full Name")]
         public string FullName { get; set; }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using University.App.Helpers;
 using University.BL.DTOs;
@@ -8,23 +9,20 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class CreateDepartmentViewModel : BaseViewModel
+    public class EditOfficeViewModel : BaseViewModel
     {
+
         #region Fields
         private ApiService _apiService;
-        private string _name;
-        private double _budget;
-        private  DateTime startDate;
+        private OfficeDTO _office;
         private bool _isEnabled;
         private bool _isRunning;
-
-        private List<InstructorDTO> _instructor;
+        private List<InstructorDTO> _instructors;
         private InstructorDTO _instructorSelected;
-
         #endregion
 
         #region Properties
-        public bool IsEnable
+        public bool IsEnabled
         {
             get { return this._isEnabled; }
             set { this.SetValue(ref this._isEnabled, value); }
@@ -36,33 +34,19 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._isRunning, value); }
         }
 
-        public Double  Budget
+        public OfficeDTO Office
         {
-            get { return this._budget; }
-            set { this.SetValue(ref this._budget, value); }
+            get { return this._office; }
+            set { this.SetValue(ref this._office, value); }
         }
-
-        public  DateTime StartDate
-        {
-            get { return this.startDate; }
-            set { this.SetValue(ref this.startDate, value); }
-        }
-
-
-        public string Name
-        {
-            get { return this._name; }
-            set { this.SetValue(ref this._name, value); }
-        }
-
 
         public List<InstructorDTO> Instructors
         {
-            get { return this._instructor; }
-            set { this.SetValue(ref this._instructor, value); }
+            get { return this._instructors; }
+            set { this.SetValue(ref this._instructors, value); }
         }
 
-        public InstructorDTO IntructorSelected
+        public InstructorDTO InstructorSelected
         {
             get { return this._instructorSelected; }
             set { this.SetValue(ref this._instructorSelected, value); }
@@ -70,26 +54,33 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Constructor
-        public CreateDepartmentViewModel()
+        public EditOfficeViewModel(OfficeDTO office)
         {
             this._apiService = new ApiService();
-            this.CreateDepartmentCommand = new Command(CreateDepartament);
-            this.GetInstructorsCommand = new Command(GetInstructor);
+
+            this.EditOfficeCommand = new Command(EditOffice);
+            this.GetInstructorsCommand = new Command(GetInstructors);
             this.GetInstructorsCommand.Execute(null);
-            this.IsEnable = true;
+
+            this.IsEnabled = true;
+
+            //editPage
+            this.Office = office;
+            this.InstructorSelected = this.Office.Instructor;
+            this.InstructorSelected = this.Instructors.FirstOrDefault(x => x.ID == this.Office.InstructorID);
         }
         #endregion
 
         #region Methods
-        async void GetInstructor()
+        async void GetInstructors()
         {
             try
             {
                 var connection = await _apiService.CheckConnection();
                 if (!connection)
                 {
-                    this.IsEnable = false;
-                    this.IsRunning = true;
+                    this.IsEnabled = true;
+                    this.IsRunning = false;
 
                     await Application.Current.MainPage.DisplayAlert("Notification",
                         "No internet connection",
@@ -109,67 +100,57 @@ namespace University.App.ViewModels.Forms
                 await Application.Current.MainPage.DisplayAlert("Notification", ex.Message, "Cancel");
             }
         }
-        async void CreateDepartament()
+
+        async void EditOffice()
         {
             try
             {
-                if (string.IsNullOrEmpty(this.Name) ||
-                    this.IntructorSelected == null||
-                    this.StartDate == null||
-                    this.Budget == 0)
+                if (string.IsNullOrEmpty(this.Office.Location) ||
+                    this.InstructorSelected == null)
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification",
-                        "The fields are required",
+                        "The fields are required.",
                         "Cancel");
                     return;
-
                 }
 
-                this.IsEnable = false;
+                this.IsEnabled = false;
                 this.IsRunning = true;
 
                 var connection = await _apiService.CheckConnection();
                 if (!connection)
                 {
-                    this.IsEnable = false;
-                    this.IsRunning = true;
+                    this.IsEnabled = true;
+                    this.IsRunning = false;
 
                     await Application.Current.MainPage.DisplayAlert("Notification",
                         "No internet connection",
                         "Cancel");
                     return;
                 }
-                var departmenDTO = new DepartmentDTO
-                {
-                    InstructorID = this.IntructorSelected.ID,
-                    Name = this.Name,
-                    Budget = this.Budget,
-                    StartDate = this.StartDate
-                    
-                    
-                };
+
                 var message = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<DepartmentDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
-                    Endpoints.POST_DEPARTMENTS,
-                    departmenDTO,
-                    ApiService.Method.Post);
+                var responseDTO = await _apiService.RequestAPI<OfficeDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
+                    Endpoints.PUT_OFFICES + this.Office.InstructorID,
+                    this.Office,
+                    ApiService.Method.Put);
 
                 if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
 
-                this.IsEnable = false;
-                this.IsRunning = true;
-               
-                this.Name = String.Empty;
+                this.IsEnabled = true;
+                this.IsRunning = false;
+
+                this.Office.Location = string.Empty;
 
                 await Application.Current.MainPage.DisplayAlert("Notification",
-                    message,
-                    "Cancel");
+                        message,
+                        "Cancel");
             }
             catch (Exception ex)
             {
-                this.IsEnable = false;
-                this.IsRunning = true;
+                this.IsEnabled = true;
+                this.IsRunning = false;
 
                 await Application.Current.MainPage.DisplayAlert("Notification", ex.Message, "Cancel");
             }
@@ -177,9 +158,9 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Commands
-        public Command CreateDepartmentCommand { get; set; }
+        public Command EditOfficeCommand { get; set; }
         public Command GetInstructorsCommand { get; set; }
-
         #endregion
     }
 }
+

@@ -12,8 +12,8 @@ namespace University.App.ViewModels.Forms
     {
         #region Fields
         private ApiService _apiService;
-        private string lastName;
-        private string firstMidName;
+        private string _lastname;
+         private string _firstmidname;
         private DateTime enrollmentDate;
         private bool isEnabled;
         private bool isRunning;
@@ -22,14 +22,15 @@ namespace University.App.ViewModels.Forms
         #region Properties
         public string LastName
         {
-            get { return this.lastName; }
-            set { this.SetValue(ref this.lastName, value); }
+            get { return this._lastname; }
+            set { this.SetValue(ref this._lastname, value); }
         }
 
+       
         public string FirstMidName
         {
-            get { return this.firstMidName; }
-            set { this.SetValue(ref this.firstMidName, value); }
+            get { return this._firstmidname; }
+            set { this.SetValue(ref this._firstmidname, value); }
         }
 
         public DateTime EnrollmentDate
@@ -86,8 +87,8 @@ namespace University.App.ViewModels.Forms
 
 
                 var studentDTO = new StudentDTO
-                {
-                    LastName = this.LastName,
+                {   
+                        LastName = this.LastName,
                     FirstMidName = this.FirstMidName,
                     EnrollmentDate = this.EnrollmentDate
                 };
@@ -102,7 +103,7 @@ namespace University.App.ViewModels.Forms
                     "The Process is successful",
                     "Cancel");
 
-                this.FirstMidName = this.FirstMidName = string.Empty;
+                this.LastName = this.LastName = string.Empty;
                 this.EnrollmentDate = DateTime.UtcNow;
 
                 this.IsEnabled = true;
