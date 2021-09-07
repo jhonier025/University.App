@@ -65,12 +65,14 @@
                                 
                                     <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    
                                     <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                            
-                                <Label Grid.Column="0" Text="{Binding FirstMidName }" HorizontalOptions="Center"></Label>
-                               
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Text="{Binding ID }" />
+                                    <Label Grid.Column="1" Text="{Binding FullName }" HorizontalOptions="Center"/>
+
                                     <ImageButton Grid.Column="2" Source="ic_delete"
                                                  BackgroundColor="Transparent" Command="{Binding DeleteStudentCommand }"/>
 

@@ -92,7 +92,7 @@ namespace University.App.ViewModels.Forms
         {
             var instructors = this._allinstrutor;
             if (!string.IsNullOrEmpty(this.Filter))
-                instructors = instructors.Where(x => x.LastName.ToLower().Contains(this.Filter)).ToList();
+                instructors = instructors.Where(x => x.FullName.ToLower().Contains(this.Filter)).ToList();
             this.Instructor = new ObservableCollection<InstructorItemViewModel>(instructors);
 
         }

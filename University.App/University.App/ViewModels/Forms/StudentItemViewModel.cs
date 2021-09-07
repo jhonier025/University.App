@@ -50,7 +50,7 @@ namespace University.App.ViewModels.Forms
                     null,
                     ApiService.Method.Delete);
 
-                if (responseDTO.Code >= 200 || responseDTO.Code > 299)
+                if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
 
                 await Application.Current.MainPage.DisplayAlert("Notification",

@@ -35,12 +35,12 @@
                     <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FirstMidName}"/>
 
                     <Label Text="EnrollmentDate" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding EnrollmentDate}"/>
+                    <DatePicker Grid.Row="3" Grid.Column="1" MaximumDate="2022-01-01" MinimumDate="1990-01-01" Date="{Binding EnrollmentDate }"  />
 
 
-                    
-                    
-                    </Grid>
+
+
+                </Grid>
                
                 <Button Text="Save" 
                         CornerRadius="23" 

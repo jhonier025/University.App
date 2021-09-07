@@ -37,8 +37,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Text="" />
-                    <Label Grid.Column="1" Text="Title" HorizontalOptions="Center" />
+                    <Label Grid.Column="0" Text="ID" />
+                    <Label Grid.Column="1" Text="Location" HorizontalOptions="Center" />
                 </Grid>
             </Frame>
 

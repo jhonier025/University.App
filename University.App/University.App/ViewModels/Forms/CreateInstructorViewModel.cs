@@ -12,8 +12,10 @@ namespace University.App.ViewModels.Forms
     {
         #region Fields
         private ApiService _apiService;
-        private int _id;
-        private string _lastname;
+        private string _lastName;
+        private string _firstMidName;
+        private DateTime _hireDate;
+        private string _fullName;
         private bool _isEnabled;
         private bool _isRunning;
 
@@ -32,18 +34,32 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._isRunning, value); }
         }
 
-        public int ID
-        {
-            get { return this._id; }
-            set { this.SetValue(ref this._id, value); }
-        }
-
+      
         public string LastName
         {
-            get { return this._lastname; }
-            set { this.SetValue(ref this._lastname, value); }
+            get { return this._lastName; }
+            set { this.SetValue(ref this._lastName, value); }
         }
-        
+
+        public string FirstMidName
+        {
+            get { return this._firstMidName; }
+            set { this.SetValue(ref this._firstMidName, value); }
+        }
+
+        public DateTime Hiredate
+        {
+            get { return this._hireDate; }
+            set { this.SetValue(ref this._hireDate, value); }
+        }
+
+        public string FullName
+        {
+            get { return this._fullName; }
+            set { this.SetValue(ref this._fullName, value); }
+        }
+
+
         #endregion
 
         #region Constructor
@@ -56,15 +72,13 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
-
         #region Methods
         async void CreateInstructor()
         {
             try
             {
-                if (string.IsNullOrEmpty(this.LastName) ||
-
-                        this.ID == 0 )
+                if (this.LastName == null)
+                        
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification",
                         "The fields are required",
@@ -89,8 +103,9 @@ namespace University.App.ViewModels.Forms
                 }
                 var instructorDTB = new InstructorDTO
                 {
-                    ID = this.ID,
-                    LastName = this.LastName,
+                      LastName = this.LastName,
+                      FirstMidName = this.FirstMidName,
+                      HireDate = this.Hiredate
                    
 
                 };
@@ -106,8 +121,9 @@ namespace University.App.ViewModels.Forms
                 this.IsEnable = false;
                 this.IsRunning = true;
 
-                this.ID = this.ID = 0;
-                this.LastName = String.Empty;
+
+                this.LastName = this.FirstMidName = this.FullName = string.Empty;
+
 
                 await Application.Current.MainPage.DisplayAlert("Notification",
                     message,

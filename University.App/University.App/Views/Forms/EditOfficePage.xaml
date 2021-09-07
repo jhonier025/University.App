@@ -26,10 +26,10 @@
                     </Grid.RowDefinitions>
 
                     <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1"  Text="{Binding Office.Location}"/>
+                    <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1"  Text="{Binding Office.InstructorID}"/>
 
-                    <Label Text="Location" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding InstructorSelected}"/>
+                    <Label Text="Title" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Office.Location}"/>
 
 
                 </Grid>

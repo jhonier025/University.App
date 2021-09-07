@@ -13,9 +13,10 @@ namespace University.App.ViewModels.Forms
         #region Fields
         private ApiService _apiService;
         private string _lastname;
-         private string _firstmidname;
+        private string _firstmidname;
         private DateTime enrollmentDate;
-        private bool isEnabled;
+        private string _fullName;
+        private bool _isEnabled;
         private bool isRunning;
         #endregion
 
@@ -26,7 +27,13 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._lastname, value); }
         }
 
-       
+        public string FullName
+        {
+            get { return this._fullName; }
+            set { this.SetValue(ref this._fullName, value); }
+        }
+
+
         public string FirstMidName
         {
             get { return this._firstmidname; }
@@ -40,8 +47,8 @@ namespace University.App.ViewModels.Forms
         }
         public bool IsEnabled
         {
-            get { return this.isEnabled; }
-            set { this.SetValue(ref this.isEnabled, value); }
+            get { return this._isEnabled; }
+            set { this.SetValue(ref this._isEnabled, value); }
         }
         public bool IsRunning
         {
@@ -50,14 +57,11 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
-
         #region Constructor
         public CreateStudentsViewModel()
         {
             this._apiService = new ApiService();
             this.IsEnabled = true;
-            this.EnrollmentDate = DateTime.UtcNow;
-
             this.CreateStudentCommand = new Command(CreateStudent);
         }
 
@@ -68,6 +72,14 @@ namespace University.App.ViewModels.Forms
         {
             try
             {
+
+                if (this.LastName == null)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Notification",
+                        "The fields are required.",
+                        "Cancel");
+                    return;
+                }
 
                 this.IsEnabled = false;
                 this.IsEnabled = true;
@@ -103,9 +115,7 @@ namespace University.App.ViewModels.Forms
                     "The Process is successful",
                     "Cancel");
 
-                this.LastName = this.LastName = string.Empty;
-                this.EnrollmentDate = DateTime.UtcNow;
-
+                this.LastName = this.FirstMidName = this.FullName = string.Empty;
                 this.IsEnabled = true;
                 this.IsRunning = false;
 

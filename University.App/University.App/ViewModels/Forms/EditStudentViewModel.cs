@@ -19,7 +19,6 @@ namespace University.App.ViewModels.Forms
 
         #endregion
 
-
         #region Properties
         public bool IsEnable
         {
@@ -42,7 +41,6 @@ namespace University.App.ViewModels.Forms
 
         #endregion
 
-
         #region Constructor
         public EditStudentViewModel(StudentDTO student)
         {
@@ -54,17 +52,12 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
-
-
-
         #region Methods
         async void EditStudent()
         {
             try
             {
-                if (string.IsNullOrEmpty(this.Student.FirstMidName) ||
-
-                        this.Student.ID == 0 )
+                if (this.Student.ID == 0 )
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification",
                         "The fields are required",
@@ -88,6 +81,7 @@ namespace University.App.ViewModels.Forms
                     return;
                 }
 
+                this.Student.FullName = null;
                 var message = "The process is successful";
                 var responseDTO = await _apiService.RequestAPI<StudentDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
                     Endpoints.PUT_STUDENTS + this.Student.ID,
@@ -100,8 +94,7 @@ namespace University.App.ViewModels.Forms
                 this.IsEnable = false;
                 this.IsRunning = true;
 
-                this.Student.ID = this.Student.ID = 0;
-                this.Student.FirstMidName = String.Empty;
+               
 
                 await Application.Current.MainPage.DisplayAlert("Notification",
                     message,
@@ -117,7 +110,6 @@ namespace University.App.ViewModels.Forms
             }
         }
         #endregion
-
 
         #region Commands
         public Command EditStudentCommand { get; set; }

@@ -59,9 +59,7 @@ namespace University.App.ViewModels.Forms
         {
             try
             {
-                if (string.IsNullOrEmpty(this.Instructor.LastName) ||
-
-                        this.Instructor.ID == 0 )
+                if (this.Instructor.ID == 0 )
                         
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification",
@@ -88,7 +86,7 @@ namespace University.App.ViewModels.Forms
 
                 var message = "The process is successful";
                 var responseDTO = await _apiService.RequestAPI<InstructorDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
-                    Endpoints.PUT_INSTRUCTOR + this.Instructor.ID,
+                    Endpoints.PUT_INSTRUCTOR,
                     this.Instructor,
                     ApiService.Method.Put);
 
@@ -98,9 +96,7 @@ namespace University.App.ViewModels.Forms
                 this.IsEnable = false;
                 this.IsRunning = true;
 
-                this.Instructor.ID = this.Instructor.ID = 0;
-                this.Instructor.LastName = String.Empty;
-
+                
                 await Application.Current.MainPage.DisplayAlert("Notification",
                     message,
                     "Cancel");

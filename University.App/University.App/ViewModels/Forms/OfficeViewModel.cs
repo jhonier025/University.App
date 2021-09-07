@@ -13,8 +13,7 @@ namespace University.App.ViewModels.Forms
     {
         #region Fields
         private ApiService _apiService;
-        private bool _isRefreshing;
-        
+        private bool _isRefreshing;        
         private ObservableCollection<OfficeItemViewModel> _office;
         private List<OfficeItemViewModel> _alloffice;
         private string _filter;
@@ -93,9 +92,9 @@ namespace University.App.ViewModels.Forms
 
         void GetOfficeByFilter()
         {
-            var office = this.Office;
+            var office = this._alloffice;
             if (!string.IsNullOrEmpty(this.Filter))
-               // office = office.Where(x => x.Instructor.ToLower().Contains(this.Filter)).ToList();
+                office = office.Where(x => x.Location.ToLower().Contains(this.Filter)).ToList();
             this.Office = new ObservableCollection<OfficeItemViewModel>(office);
 
         }

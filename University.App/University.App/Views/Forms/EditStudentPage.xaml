@@ -22,16 +22,23 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         
                     </Grid.RowDefinitions>
+                    <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                    <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1" Text="{Binding Student.ID}" />
 
-                    <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1"  Text="{Binding Student.ID}"/>
+                    <Label Text="LastName" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Student.LastName}" />
 
-                    <Label Text="FullName" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Student.FullName}"/>
+                    <Label Text="FirstMidName" Grid.Row="2" Grid.Column="0" VerticalOptions="Center" />
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Student.FirstMidName}" />
 
-                    
+                    <Label Text="EnrollmentDate" Grid.Row="3" Grid.Column="0" VerticalOptions="Center" />
+                    <DatePicker Grid.Row="3" Grid.Column="1" MaximumDate="2022-01-01" MinimumDate="1990-01-01" Date="{Binding Student.EnrollmentDate }"  />
+
+
                 </Grid>
 
                 <Button Text="Save" 
