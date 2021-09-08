@@ -15,7 +15,6 @@ namespace University.App.ViewModels.Forms
         private DepartmentDTO _department;
         private bool _isEnabled;
         private bool _isRunning;
-
         private List<InstructorDTO> _instructor;
         private InstructorDTO _instructorSelected;
 
@@ -134,12 +133,13 @@ namespace University.App.ViewModels.Forms
                 var departmentDTO = new DepartmentDTO
                 {
                     InstructorID = this.IntructorSelected.ID,
+
                     
                 };
 
                 var message = "The process is successful";
                 var responseDTO = await _apiService.RequestAPI<DepartmentDTO>(Endpoints.URL_BASE_UNIVERSITY_API,
-                    Endpoints.PUT_DEPARTMENTS + this.Department.DepartmentID,
+                    Endpoints.PUT_DEPARTMENTS + this.Department.Name,
                     this.Department,
                     ApiService.Method.Put);
 

@@ -13,6 +13,7 @@ namespace University.App.ViewModels.Forms
         #region Fields
         private ApiService _apiService;
         private string _name;
+        private int _intructorID;
         private double _budget;
         private  DateTime startDate;
         private bool _isEnabled;
@@ -53,6 +54,11 @@ namespace University.App.ViewModels.Forms
         {
             get { return this._name; }
             set { this.SetValue(ref this._name, value); }
+        }
+        public int InstrutorID
+        {
+            get { return this._intructorID; }
+            set { this.SetValue(ref this._intructorID, value); }
         }
 
 
@@ -116,7 +122,8 @@ namespace University.App.ViewModels.Forms
                 if (string.IsNullOrEmpty(this.Name) ||
                     this.IntructorSelected == null||
                     this.StartDate == null||
-                    this.Budget == 0)
+                    this.Budget == 0||
+                    this.InstrutorID == 0)
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification",
                         "The fields are required",
@@ -141,7 +148,7 @@ namespace University.App.ViewModels.Forms
                 }
                 var departmenDTO = new DepartmentDTO
                 {
-                    InstructorID = this.IntructorSelected.ID,
+                    InstructorID = this.InstrutorID,
                     Name = this.Name,
                     Budget = this.Budget,
                     StartDate = this.StartDate
@@ -160,7 +167,6 @@ namespace University.App.ViewModels.Forms
                 this.IsEnable = false;
                 this.IsRunning = true;
                
-                this.Name = String.Empty;
 
                 await Application.Current.MainPage.DisplayAlert("Notification",
                     message,

@@ -67,7 +67,7 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Column="0" Text="{Binding DepartmentID}" />
+                                        <Label Grid.Column="0" Text="{Binding  DepartmentID}" />
                                         <Label Grid.Column="1" Text="{Binding Name}" HorizontalOptions="Center" />
                                         <ImageButton Grid.Column="2" Source="ic_delete"
                                                  BackgroundColor="Transparent" Command="{Binding DeleteDepartmentCommand}"/>

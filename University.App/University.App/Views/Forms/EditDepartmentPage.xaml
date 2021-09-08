@@ -10,7 +10,7 @@
 
                 <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                    <Label Text="Edit Courses" TextColor="Blue" 
+                    <Label Text="Edit Department" TextColor="Blue" 
                        FontSize="38" HorizontalTextAlignment="Center" />
                 </Frame>
 
@@ -23,14 +23,25 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                      
 
-                    <Label Text="Name" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry IsEnabled="True" Grid.Row="0" Grid.Column="1"  Text="{Binding Department.Name}"/>
+                    <Label Text="DepatmentID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Keyboard="Numeric" Grid.Row="0" Grid.Column="1"  Text="{Binding Department.DepartmentID}"/>
 
-                    <Label Text="Title" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Department.StartDate}"/>
+                    <Label Text="Name" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Department.Name}"/>
+
+                    <Label Text="Budget" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="{Binding Department.Budget}"/>
+
+                    <Label Text="StartDate" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Department.StartDate}"/>
+                    
+                    <Label Text="InstructorID" Grid.Row="4" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry Keyboard="Numeric" Grid.Row="4" Grid.Column="1" Text="{Binding Department.InstructorID}"/>
 
                 </Grid>
 
